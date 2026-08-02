@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="blueprint">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex, nosnippet">
+<title>Project — SCIPL</title>
+<meta name="description" content="A turnkey interior fit-out delivered by Shree Commercial Interiors Pvt. Ltd.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/theme.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>
+  document.documentElement.dataset.theme  = localStorage.getItem('scipl.theme')  || 'blueprint';
+  document.documentElement.dataset.motion = localStorage.getItem('scipl.motion') || 'on';
+</script>
+</head>
+<body data-page="project" data-overhero="true">
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr is-over">
+  <div class="wrap hdr__in">
+    <a class="brand" href="index.html" data-nav>
+      <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <path d="M50 6 94 31v50L50 106 6 81V31z" stroke="currentColor" stroke-width="6"/>
+        <path d="M50 31 72 44v25L50 82 28 69V44z" fill="currentColor"/></svg>
+      <span><b>SCIPL</b><span>Shree Commercial Interiors</span></span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a class="u" href="work.html" data-nav>Work</a>
+      <a class="u" href="index.html#capabilities" data-nav>Capabilities</a>
+      <a class="u" href="index.html#sectors" data-nav>Sectors</a>
+      <a class="u" href="index.html#process" data-nav>About</a>
+      <a class="u" href="index.html#enquiry" data-nav>Contact</a>
+    </nav>
+    <div class="hdr__right">
+      <div class="units" role="group" aria-label="Area units">
+        <button data-pref="units" data-val="sqft" aria-pressed="true"><span>sq ft</span></button>
+        <button data-pref="units" data-val="sqm"  aria-pressed="false"><span>sq m</span></button>
+      </div>
+      <button class="burger" aria-label="Menu" aria-expanded="false"><i></i><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+
+<nav class="menu" aria-label="Mobile">
+  <a href="work.html" data-nav>Work</a>
+  <a href="index.html#capabilities" data-nav>Capabilities</a>
+  <a href="index.html#sectors" data-nav>Sectors</a>
+  <a href="index.html#process" data-nav>How we work</a>
+  <a href="index.html#enquiry" data-nav>Contact</a>
+</nav>
+
+<main id="main">
+
+<!-- opening image, with parallax -->
+<section class="hero" style="min-height:min(78vh,760px)">
+  <div class="hero__media"></div>
+  <div class="hero__scrim"></div>
+  <div class="wrap hero__in on-dark">
+    <p class="meta" id="p-eyebrow" style="color:rgba(255,255,255,.72)"></p>
+    <h1 class="display" id="p-client" style="margin-top:var(--space-4)"></h1>
+    <p class="hero__sub" id="p-headline"></p>
+  </div>
+</section>
+
+<!-- title + facts + story -->
+<section class="section">
+  <div class="wrap">
+    <div class="pcols">
+      <div>
+        <div id="p-toc" class="toc rv"></div>
+        <div class="story" id="p-story"></div>
+
+        <h3 style="margin-top:var(--space-9)">Before and after</h3>
+        <div id="p-ba" style="margin-top:var(--space-5)"></div>
+      </div>
+
+      <aside>
+        <div class="facts rv">
+          <p class="meta" style="padding-bottom:var(--space-3);border-bottom:1px solid var(--fg)">Project facts</p>
+          <div id="p-facts"></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- gallery -->
+<section class="section section--tight" id="gallery">
+  <div class="wrap">
+    <div class="sec-head rv"><h2>Gallery</h2>
+      <p class="meta">Click any photograph to enlarge · arrow keys to move · Esc to close</p>
+    </div>
+    <div class="gal rv" id="p-gallery"></div>
+  </div>
+</section>
+
+<!-- team -->
+<section class="section section--tight field">
+  <div class="wrap">
+    <div class="sec-head rv" style="border-bottom-color:rgba(255,255,255,.22)">
+      <h2>Who ran this job</h2>
+      <p class="meta" style="max-width:38ch;text-align:right">Every project names the people who
+        delivered it. No competitor in the sector does this.</p>
+    </div>
+    <p class="lead" style="opacity:.85;max-width:56ch">
+      <span class="awaiting" title="Placeholder — awaiting content from SCIPL">Project manager and site in charge to be named, with a photograph, a line of experience and the other projects each has delivered.</span>
+    </p>
+  </div>
+</section>
+
+<!-- next -->
+<section class="section">
+  <div class="wrap"><div id="p-next"></div></div>
+</section>
+
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__base" style="margin-top:0;border-top:0">
+      <span>&copy; <span id="yr"></span> Shree Commercial Interiors Pvt. Ltd.</span>
+      <span><a class="u" href="work.html" data-nav>All work</a> · <a class="u" href="index.html" data-nav>Home</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="prefs">
+  <button class="prefs__btn" aria-label="Preferences">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 7h10M18 7h2M4 12h2M10 12h10M4 17h12M20 17h0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      <circle cx="16" cy="7" r="2.2" stroke="currentColor" stroke-width="1.6"/>
+      <circle cx="8" cy="12" r="2.2" stroke="currentColor" stroke-width="1.6"/>
+      <circle cx="18" cy="17" r="2.2" stroke="currentColor" stroke-width="1.6"/></svg>
+  </button>
+  <div class="prefs__panel">
+    <div class="prefs__row"><h6>Identity</h6><div class="prefs__opts">
+      <button data-pref="theme" data-val="blueprint">A — Blueprint<small>Warm paper, maroon accent, Archivo</small></button>
+      <button data-pref="theme" data-val="signal">B — Signal<small>Near-black, gold, Geist + mono</small></button>
+      <button data-pref="theme" data-val="imprint">C — Imprint<small>Bone, maroon fields, Instrument Serif</small></button>
+    </div></div>
+    <div class="prefs__row"><h6>Units</h6><div class="prefs__opts">
+      <button data-pref="units" data-val="sqft">Square feet</button>
+      <button data-pref="units" data-val="sqm">Square metres</button>
+    </div></div>
+    <div class="prefs__row"><h6>Motion</h6><div class="prefs__opts">
+      <button data-pref="motion" data-val="on">On</button>
+      <button data-pref="motion" data-val="off">Reduced</button>
+    </div></div>
+  </div>
+</div>
+
+<div class="protobar">
+  <span>Prototype — the facts panel, before/after slider and gallery are live. Fields marked ◇ await content from SCIPL.</span>
+  <button aria-label="Dismiss">Dismiss &times;</button>
+</div>
+
+<script src="data/site-data.js"></script>
+<script src="assets/js/site.js"></script>
+<script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>

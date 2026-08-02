@@ -1,0 +1,236 @@
+/* ===========================================================================
+   SCIPL prototype — THEME LAYER
+   ---------------------------------------------------------------------------
+   The three identity options in brand/tokens/*.css each name their variables
+   differently (--paper / --ground / --bone …). The site cannot be written
+   against three different vocabularies, so this file does one job: it maps
+   each identity onto a single SEMANTIC API that site.css consumes.
+
+       --bg --bg-alt --surface --fg --fg-muted --accent --on-accent
+       --rule --border --field-bg --field-fg --duration --ease
+       --font-display --font-body --font-mono  + a shared type scale
+
+   Consequence: the whole site can be re-skinned by changing one attribute on
+   <html>, which is what the identity switcher does. Nothing in site.css knows
+   which identity is active.
+   =========================================================================== */
+
+/* ---------- shared, identity-independent ---------- */
+:root{
+  --radius: 0;                 /* all three identities: zero. Sector grammar. */
+  --container: 1440px;
+  --measure: 68ch;
+  --gutter: clamp(20px, 4vw, 64px);
+
+  --space-1:4px;  --space-2:8px;  --space-3:12px; --space-4:16px;
+  --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px;
+  --space-9:96px; --space-10:128px; --space-11:160px; --space-12:192px;
+
+  --header-h: 76px;
+  --header-h-min: 58px;
+
+  /* motion, overridden per identity */
+  --duration: 400ms;
+  --duration-fast: 200ms;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --reveal-y: 22px;            /* the "rise" in scroll reveal */
+  --parallax: 0.15;            /* 15% — read by JS */
+}
+
+/* =========================================================================
+   A — BLUEPRINT   warm paper · maroon as the only accent · Archivo
+   ========================================================================= */
+[data-theme="blueprint"]{
+  color-scheme: light;
+
+  --bg:            #FAF9F7;
+  --bg-alt:        #F2F0EC;
+  --surface:       #FFFFFF;
+  --fg:            #1A1A1C;
+  --fg-muted:      #6B6B70;
+  --accent:        #99252B;
+  --accent-hover:  #870E1C;
+  --accent-tint:   #FFF4F3;
+  --on-accent:     #FFFFFF;
+  --rule:          #DCDAD5;
+  --border:        #8A8A8E;
+  --gold:          #FDB713;      /* graphic only, never text on paper */
+
+  --field-bg:      #1A1A1C;
+  --field-fg:      #FAF9F7;
+  --field-muted:   #A6A5A2;
+  --field-accent:  #FDB713;
+
+  --font-display: 'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body:    'Archivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --fs-display: clamp(2.75rem, 1.2rem + 6.2vw, 6rem);
+  --fs-h1:      clamp(2rem, 1.1rem + 3.6vw, 3.375rem);
+  --fs-h2:      clamp(1.5rem, 1.0rem + 2.0vw, 2.5rem);
+  --fs-h3:      clamp(1.25rem, 0.95rem + 1.2vw, 1.875rem);
+  --fs-h4:      1.375rem;
+  --fs-lg:      1.25rem;
+  --fs-body:    1.0625rem;
+  --fs-small:   0.9375rem;
+  --fs-meta:    0.8125rem;
+
+  --lh-solid: 1;
+  --lh-tight: 1.1;
+  --lh-body:  1.647;
+
+  --track-display: -0.03em;
+  --track-h:       -0.025em;
+  --track-meta:    0.08em;
+
+  --w-display: 700;
+  --w-h:       600;
+  --w-body:    400;
+  --w-strong:  600;
+
+  --display-case: none;
+  --section-y: var(--space-10);
+
+  --duration: 480ms;
+  --duration-fast: 240ms;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* =========================================================================
+   B — SIGNAL   near-black · gold finally usable · Geist + Geist Mono
+   ========================================================================= */
+[data-theme="signal"]{
+  color-scheme: dark;
+
+  --bg:            #0E0E10;
+  --bg-alt:        #17171A;
+  --surface:       #1F1F23;
+  --fg:            #F2F2F3;
+  --fg-muted:      #A6A6A9;
+  --accent:        #FDB713;
+  --accent-hover:  #D69A0C;
+  --accent-tint:   #211B0B;
+  --on-accent:     #0E0E10;
+  --rule:          #2E2E33;
+  --border:        #707074;
+  --brand:         #C36F6C;      /* maroon LIFTED — true #99252B is 2.44:1 here */
+
+  --field-bg:      #99252B;      /* permitted only as a large flat field */
+  --field-fg:      #FFFFFF;
+  --field-muted:   #F5CECC;
+  --field-accent:  #FDB713;
+
+  --font-display: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body:    'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:    'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --fs-display: clamp(2.5rem, 1.3rem + 4.8vw, 5rem);
+  --fs-h1:      clamp(1.75rem, 1.1rem + 2.6vw, 3rem);
+  --fs-h2:      clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem);
+  --fs-h3:      clamp(1.25rem, 1.0rem + 1.0vw, 1.75rem);
+  --fs-h4:      1.25rem;
+  --fs-lg:      1.125rem;
+  --fs-body:    1rem;
+  --fs-small:   0.875rem;
+  --fs-meta:    0.75rem;
+
+  --lh-solid: 1;
+  --lh-tight: 1.11;
+  --lh-body:  1.625;
+
+  --track-display: -0.03em;
+  --track-h:       -0.025em;
+  --track-meta:    0.10em;
+
+  --w-display: 600;
+  --w-h:       600;
+  --w-body:    400;
+  --w-strong:  500;
+
+  --display-case: none;
+  --section-y: var(--space-10);
+
+  --duration: 180ms;
+  --duration-fast: 120ms;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+}
+
+/* Signal runs its data layer in mono — the one place a second family appears. */
+[data-theme="signal"] .meta,
+[data-theme="signal"] .data,
+[data-theme="signal"] .facts dt,
+[data-theme="signal"] .stat-n{
+  font-family: var(--font-mono);
+}
+
+/* =========================================================================
+   C — IMPRINT   bone paper · maroon as a full-bleed field · Instrument Serif
+   ========================================================================= */
+[data-theme="imprint"]{
+  color-scheme: light;
+
+  --bg:            #F7F4EF;
+  --bg-alt:        #EFEAE1;
+  --surface:       #FFFFFF;
+  --fg:            #22201E;
+  --fg-muted:      #6E6862;
+  --accent:        #99252B;
+  --accent-hover:  #870E1C;
+  --accent-tint:   #F6EAE7;
+  --on-accent:     #FFFFFF;
+  --rule:          #DDD6CA;
+  --border:        #8A8A8E;
+  --gold:          #FDB713;
+
+  --field-bg:      #99252B;
+  --field-fg:      #FFFFFF;
+  --field-muted:   #F5CECC;
+  --field-accent:  #FDB713;
+
+  --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --font-body:    'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono:    ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --fs-display: clamp(3rem, 1.2rem + 7.2vw, 6.5rem);
+  --fs-h1:      clamp(2.25rem, 1.2rem + 4.2vw, 4.25rem);
+  --fs-h2:      clamp(1.75rem, 1.2rem + 2.2vw, 2.75rem);
+  --fs-h3:      clamp(1.375rem, 1.1rem + 1.1vw, 1.875rem);
+  --fs-h4:      1.3125rem;
+  --fs-lg:      1.25rem;
+  --fs-body:    1.125rem;
+  --fs-small:   0.9375rem;
+  --fs-meta:    0.8125rem;
+
+  --lh-solid: 0.96;
+  --lh-tight: 1.14;
+  --lh-body:  1.667;
+
+  --track-display: -0.02em;
+  --track-h:       -0.015em;
+  --track-meta:    0.08em;
+
+  --w-display: 400;   /* Instrument Serif ships one weight — never synthesise */
+  --w-h:       400;
+  --w-body:    400;
+  --w-strong:  600;
+
+  --display-case: none;
+  --section-y: var(--space-11);   /* most generous of the three */
+
+  --duration: 600ms;
+  --duration-fast: 300ms;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Imprint's display serif has a hard size floor — below h2 it returns to sans. */
+[data-theme="imprint"] .display,
+[data-theme="imprint"] h1,
+[data-theme="imprint"] h2{
+  font-synthesis-weight: none;
+}
+[data-theme="imprint"] h3,
+[data-theme="imprint"] h4{
+  font-family: var(--font-body);
+  font-weight: 600;
+}
