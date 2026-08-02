@@ -26,10 +26,26 @@ const PREF = {
   units:  localStorage.getItem('scipl.units')  || 'sqft',
   motion: localStorage.getItem('scipl.motion') || 'on',
 };
+/* ?id=workshop | marque | measure  — a shareable link straight to one identity,
+   which is how a client should be sent a specific option to look at. Also what
+   the screenshot rig uses, so a capture never depends on stored state. */
+const ID_ALIAS = { workshop:'blueprint', marque:'signal', measure:'imprint',
+                   blueprint:'blueprint', signal:'signal', imprint:'imprint' };
+const urlId = ID_ALIAS[(new URLSearchParams(location.search).get('id') || '').toLowerCase()];
+if (urlId) PREF.theme = urlId;
+
+let booted = false;
 const setPref = (k, v) => {
+  const changed = PREF[k] !== v;
   PREF[k] = v;
   localStorage.setItem('scipl.' + k, v);
   applyPrefs();
+  // switching identity switches the motion vocabulary too, not just the palette
+  if (changed && (k === 'theme' || k === 'motion') && booted && window.SCIPLMotion && window.SCIPLMotion.ok){
+    window.SCIPLMotion.reboot();
+    const n = $('#profile-name');
+    if (n) n.textContent = window.SCIPLMotion.profileName();
+  }
 };
 function applyPrefs(){
   document.documentElement.dataset.theme  = PREF.theme;
@@ -103,8 +119,9 @@ const projLine = p => [p.sector, p.city, areaText(p.area_sqft)].filter(Boolean).
 
 function cardHTML(p, sizes){
   const im = heroImg(p);
+  // the frame ratio is a per-identity token (all three brand documents say 4:5)
   return `<a class="card rv" href="project.html?p=${p.slug}" data-nav>
-    <span class="card__fig fig" style="aspect-ratio:16/10">
+    <span class="card__fig fig">
       ${picture(p.slug, im, sizes, { alt: altFor(p) })}
       <span class="card__over">
         <span class="meta" style="color:rgba(255,255,255,.8)">${p.sector}</span>
@@ -202,6 +219,8 @@ function parallax(){
   veil.className = 'pt';
   document.body.appendChild(veil);
   requestAnimationFrame(() => veil.classList.add('is-gone'));
+  // the veil is the one element that must never survive a stalled frame loop
+  setTimeout(() => { veil.classList.add('is-gone'); veil.style.display = 'none'; }, 700);
 
   document.addEventListener('click', e => {
     const a = e.target.closest('a[data-nav]');
@@ -210,6 +229,7 @@ function parallax(){
     if (url.origin !== location.origin) return;
     e.preventDefault();
     if (PREF.motion === 'off'){ location.href = url.href; return; }
+    veil.style.display = '';
     veil.classList.remove('is-gone');
     setTimeout(() => location.href = url.href, 340);
   });
@@ -366,6 +386,19 @@ function renderHome(){
       .map(p => cardHTML(p, '(max-width:860px) 100vw, 30vw')).join('')}</div>`;
   }
 
+  // Marque replaces the editorial feature stack with a horizontally pinned rail
+  const rt = $('#rail-track');
+  if (rt) rt.innerHTML = D.projects.filter(p => p.grade !== 'thumb').slice(0, 10)
+    .map(p => `<div class="rail__card">${cardHTML(p, '(max-width:860px) 78vw, 38vw')}</div>`).join('');
+
+  // the ticker — Marque only; hidden by identity.css elsewhere
+  const tr = $('#tick-row');
+  if (tr) tr.innerHTML = ['Civil &amp; interior', 'Carpentry', 'False ceiling &amp; POP', 'HVAC',
+    'Electrical &amp; networking', 'Plumbing', 'Fire alarm', 'Sprinkler', 'Access control &amp; CCTV',
+    'Glazing &amp; metal fabrication', 'ACP cladding', 'Modular furniture', 'Painting',
+    'Exterior furnishing', 'Customised furniture']
+    .map(s => `<span>${s}</span>`).join('');
+
   // clients — typographic until SCIPL supplies individual logo files
   const CLIENTS = ['Bosch','Colgate Palmolive','Oracle','Toyota','L&T','Ultratech','FedEx','UPS',
     'Vodafone','Godrej','Allianz','ICICI Prudential','TATA AIG','Knight Frank','NTT DATA','Fidelity',
@@ -507,6 +540,18 @@ function renderProject(){
     </div>
     <button class="more u" id="p-more" aria-expanded="false">More details</button>`;
 
+  // Marque swaps the sticky sidebar for a full-width mono data table — the
+  // component its brand document calls the one that defines the variation
+  const dr = $('#p-datarow');
+  if (dr) dr.innerHTML = [
+    ['Client', p.client], ['Location', p.location],
+    ['Area', `<span data-sqft="${p.area_sqft || ''}"></span>`],
+    ['Sector', p.sector], ['Status', val(p.status)], ['Completed', val(p.year)],
+    ['Programme', val(p.duration)], ['Environment', val(p.environment)],
+    ['Consultants', val(p.consultants)], ['Certification', val(p.certification)],
+    ['Scope', p.scope.join(' · ')], ['Project manager', val(p.pm)], ['Site in charge', val(p.site_lead)],
+  ].map(([k, v]) => `<div class="datarow__r"><div class="datarow__k">${k}</div><div class="datarow__v">${v}</div></div>`).join('');
+
   $('#p-more').addEventListener('click', e => {
     const box = $('#p-extra');
     const open = box.classList.toggle('is-open');
@@ -579,11 +624,22 @@ if (page === 'work')    renderWork();
 if (page === 'project') renderProject();
 
 renderAreas();
-observeReveals();
-parallax();
 watchImages();
 
-/* re-run the reveal observer after any late render */
-setTimeout(() => { observeReveals(); watchImages(); }, 60);
+/* Motion is owned by motion.js when GSAP is present — it gives each identity its
+   own vocabulary. The IntersectionObserver path below is the fallback for when
+   the libraries fail to load, so content is never trapped behind a dead effect. */
+if (window.SCIPLMotion && window.SCIPLMotion.ok){
+  window.SCIPLMotion.boot();
+  booted = true;
+  const n = $('#profile-name');
+  if (n) n.textContent = window.SCIPLMotion.profileName();
+} else {
+  observeReveals();
+  parallax();
+  setTimeout(() => { observeReveals(); watchImages(); }, 60);
+}
+
+setTimeout(watchImages, 120);
 
 })();

@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow, noarchive, noimageindex, nosnippet">
 <title>Project — SCIPL</title>
 <meta name="description" content="A turnkey interior fit-out delivered by Shree Commercial Interiors Pvt. Ltd.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,14 +10,20 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/theme.css">
 <link rel="stylesheet" href="assets/css/site.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/identity.css">
 <script>
-  document.documentElement.dataset.theme  = localStorage.getItem('scipl.theme')  || 'blueprint';
+  var A={workshop:'blueprint',marque:'signal',measure:'imprint',blueprint:'blueprint',signal:'signal',imprint:'imprint'};
+  var q=A[(new URLSearchParams(location.search).get('id')||'').toLowerCase()];
+  document.documentElement.dataset.theme  = q || localStorage.getItem('scipl.theme')  || 'blueprint';
   document.documentElement.dataset.motion = localStorage.getItem('scipl.motion') || 'on';
 </script>
 </head>
 <body data-page="project" data-overhero="true">
 
 <a class="skip" href="#main">Skip to content</a>
+<div class="progress" aria-hidden="true"></div>
+<div class="cur" aria-hidden="true"><span class="cur__ring"></span><span class="cur__dot"></span><span class="cur__lbl"></span></div>
 
 <header class="hdr is-over">
   <div class="wrap hdr__in">
@@ -56,7 +61,7 @@
 <main id="main">
 
 <!-- opening image, with parallax -->
-<section class="hero" style="min-height:min(78vh,760px)">
+<section class="hero hero--project">
   <div class="hero__media"></div>
   <div class="hero__scrim"></div>
   <div class="wrap hero__in on-dark">
@@ -85,6 +90,14 @@
         </div>
       </aside>
     </div>
+  </div>
+</section>
+
+<!-- Marque only: full-width mono data table -->
+<section class="section section--tight datarow-sec">
+  <div class="wrap">
+    <div class="sec-head"><h2>Project data</h2><p class="meta">Tabulated</p></div>
+    <div class="datarow" id="p-datarow"></div>
   </div>
 </section>
 
@@ -138,10 +151,10 @@
   </button>
   <div class="prefs__panel">
     <div class="prefs__row"><h6>Identity</h6><div class="prefs__opts">
-      <button data-pref="theme" data-val="blueprint">A — Blueprint<small>Warm paper, maroon accent, Archivo</small></button>
-      <button data-pref="theme" data-val="signal">B — Signal<small>Near-black, gold, Geist + mono</small></button>
-      <button data-pref="theme" data-val="imprint">C — Imprint<small>Bone, maroon fields, Instrument Serif</small></button>
-    </div></div>
+      <button data-pref="theme" data-val="blueprint">01 &mdash; Workshop<small>Paper &amp; maroon &middot; headline below the image &middot; gold section rules &middot; uncovered reveals, 480ms</small></button>
+      <button data-pref="theme" data-val="signal">02 &mdash; Marque<small>Near-black &amp; gold &middot; text on photography &middot; mono data rows, grid lines, pinned horizontal work &middot; 180ms</small></button>
+      <button data-pref="theme" data-val="imprint">03 &mdash; Measure<small>Bone &amp; maroon fields &middot; serif at scale &middot; maroon nav and footer &middot; words rise from a mask, 600ms</small></button>
+    </div><p class="prefs__note">Each option changes layout, components and motion &mdash; not only the palette. Active: <strong id="profile-name">Workshop</strong>.</p></div>
     <div class="prefs__row"><h6>Units</h6><div class="prefs__opts">
       <button data-pref="units" data-val="sqft">Square feet</button>
       <button data-pref="units" data-val="sqm">Square metres</button>
@@ -158,7 +171,11 @@
   <button aria-label="Dismiss">Dismiss &times;</button>
 </div>
 
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
 <script src="data/site-data.js"></script>
+<script src="assets/js/motion.js"></script>
 <script src="assets/js/site.js"></script>
 <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
 </body>

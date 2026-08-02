@@ -185,6 +185,12 @@ body.menu-open .menu{ opacity:1; visibility:visible; }
 body.menu-open .menu a{ opacity:1; transform:none; }
 
 /* ---------- images: reserved box + fade-in ---------- */
+/* <picture> is display:inline by default. Anything that transforms or clips it
+   — and every identity's reveal does — collapses the inline box and the
+   photograph vanishes. It must be a block that fills its frame. */
+.fig picture, .card__fig picture, .hero__media picture, .gal picture, .ba picture{
+  display:block; width:100%; height:100%;
+}
 .fig{ position:relative; overflow:hidden; background:var(--bg-alt); display:block; }
 .fig img{ width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 600ms var(--ease); }
 .fig img.is-loaded{ opacity:1; }
@@ -446,7 +452,9 @@ body.is-leaving .pt{ opacity:1; pointer-events:auto; }
 /* ---------- prototype banner ---------- */
 .protobar{
   position:fixed; inset:auto 0 0 0; z-index:140;
-  background:var(--field-bg); color:var(--field-fg);
+  /* deliberately NOT the maroon field — Signal restricts maroon to large flat
+     areas, and this is prototype chrome, not part of any identity */
+  background:var(--fg); color:var(--bg);
   font-size:var(--fs-meta); letter-spacing:.03em;
   padding:.55em var(--gutter);
   display:flex; gap:var(--space-4); justify-content:space-between; align-items:center;

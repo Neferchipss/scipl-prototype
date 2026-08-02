@@ -1,0 +1,84 @@
+/* ===========================================================================
+   SCIPL prototype — SHARED COMPONENT LAYER
+   New elements introduced for the immersive pass. Everything here is
+   identity-neutral; identity.css restyles or hides these per variation.
+   =========================================================================== */
+
+/* ---------- scroll progress ---------- */
+.progress{
+  position:fixed; inset:0 auto auto 0; z-index:130;
+  height:2px; width:100%; transform:scaleX(0); transform-origin:left;
+  background:var(--accent); pointer-events:none;
+}
+
+/* ---------- custom cursor ---------- */
+.cur{ position:fixed; top:0; left:0; z-index:250; pointer-events:none;
+  mix-blend-mode:difference; opacity:0; transition:opacity .25s ease; }
+.cur.is-on{ opacity:1; }
+.cur__dot{ position:absolute; translate:-50% -50%; width:9px; height:9px; background:#fff; }
+.cur__ring{ position:absolute; translate:-50% -50%; width:40px; height:40px;
+  border:1px solid rgba(255,255,255,.85); transition:width .3s var(--ease), height .3s var(--ease); }
+.cur__lbl{ position:absolute; translate:-50% -50%; color:#fff; white-space:nowrap;
+  font-size:10px; letter-spacing:.14em; text-transform:uppercase; opacity:0;
+  transition:opacity .25s ease; }
+.cur.is-media .cur__ring{ width:72px; height:72px; }
+.cur.is-media .cur__lbl{ opacity:1; }
+@media (hover:none),(max-width:900px){ .cur{ display:none; } }
+
+/* ---------- text masking, used by every identity's reveal ---------- */
+.ln{ display:block; overflow:hidden; }
+.ln > span{ display:block; will-change:transform; }
+.wd{ display:inline-block; overflow:hidden; vertical-align:top; }
+.wd > span{ display:inline-block; will-change:transform; }
+
+/* ---------- image reveal mask ---------- */
+.mask{ overflow:hidden; }
+.mask > *{ will-change:transform, clip-path; }
+
+/* ---------- marquee ticker ---------- */
+.tick{ overflow:hidden; border-block:1px solid var(--rule); padding-block:var(--space-4); }
+.tick__row{ display:flex; gap:var(--space-8); width:max-content; will-change:transform; }
+.tick__row span{ font-size:var(--fs-meta); letter-spacing:var(--track-meta);
+  text-transform:uppercase; color:var(--fg-muted); white-space:nowrap;
+  display:inline-flex; align-items:center; gap:var(--space-8); }
+.tick__row span::after{ content:''; width:5px; height:5px; background:var(--accent); flex:none; }
+
+/* ---------- magnetic button wrapper ---------- */
+.mag{ display:inline-block; will-change:transform; }
+.mag > *{ display:inline-flex; will-change:transform; }
+
+/* ---------- horizontal pinned rail (Marque's selected work) ---------- */
+.rail{ position:relative; }
+.rail__vp{ overflow:hidden; }
+.rail__track{ display:flex; gap:var(--space-6); width:max-content; padding-inline:var(--gutter); }
+.rail__card{ width:min(38vw, 460px); flex:none; }
+.rail__hint{ margin-top:var(--space-5); }
+
+/* ---------- mono data row (Marque's defining component) ---------- */
+.datarow{ border-top:1px solid var(--rule); }
+.datarow__r{ display:grid; grid-template-columns:200px 1fr; gap:var(--space-5);
+  padding-block:var(--space-4); border-bottom:1px solid var(--rule); align-items:baseline; }
+.datarow__k{ font-size:var(--fs-meta); letter-spacing:var(--track-meta);
+  text-transform:uppercase; color:var(--fg-muted); }
+.datarow__v{ font-size:var(--fs-small); font-variant-numeric:tabular-nums; }
+@media (max-width:700px){ .datarow__r{ grid-template-columns:1fr; gap:var(--space-1); } }
+
+/* ---------- pull quote (Measure's defining component) ---------- */
+.pull{ display:none; }
+.pull__q{ font-family:var(--font-display); font-size:var(--fs-h1); line-height:1.14;
+  max-width:24ch; font-style:italic; }
+.pull__bar{ width:48px; height:3px; background:var(--field-accent); margin-bottom:var(--space-6); }
+.pull__by{ margin-top:var(--space-6); }
+
+/* ---------- section ornament: the isometric mark (Marque) ---------- */
+.orn{ position:absolute; inset:auto -80px -60px auto; width:440px; height:440px;
+  opacity:0; pointer-events:none; color:var(--fg); }
+.orn svg{ width:100%; height:100%; }
+
+/* ---------- column grid lines (Marque) ---------- */
+.gridlines{ position:absolute; inset:0; pointer-events:none; display:none;
+  grid-template-columns:repeat(12,1fr); }
+.gridlines i{ border-left:1px solid var(--rule); transform:scaleY(0); transform-origin:top; }
+
+/* ---------- gold rule above section headings (Workshop) ---------- */
+.sec-head h2{ position:relative; }

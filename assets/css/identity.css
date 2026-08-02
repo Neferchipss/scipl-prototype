@@ -1,0 +1,213 @@
+/* ===========================================================================
+   SCIPL prototype — IDENTITY LAYER
+   ---------------------------------------------------------------------------
+   The three variations are NOT a palette swap. Each one is built to the
+   presentation its own brand document specifies, so the same content and the
+   same information architecture arrive as three different design languages:
+
+     01 WORKSHOP  headline BELOW the image · gold rule above every section ·
+                  hairlines and space, no scrims, no gradients · editorial
+                  alternating features · 480ms expo-out
+     02 MARQUE    full-bleed 70vh hero with the headline inside a solid scrim ·
+                  mono data rows · column grid lines · isometric watermark ·
+                  horizontally pinned work rail · ticker · 180ms mechanical
+     03 MEASURE   maroon navigation and footer · alternating bone/maroon
+                  chapters · serif at scale · pull quote on a maroon field ·
+                  stacked full-width plates · 600ms unhurried
+
+   Structure and infrastructure are identical across all three — only the
+   presentation and the motion vocabulary change.
+   =========================================================================== */
+
+/* =========================================================================
+   01 — WORKSHOP   (tokens: blueprint)
+   ========================================================================= */
+[data-theme="blueprint"]{ --card-ratio: 4/5; --hero-mode: below; }
+
+/* header never sits over photography — Workshop forbids text on images */
+[data-theme="blueprint"] .hdr{ background:var(--bg); color:var(--fg); border-bottom-color:var(--rule); }
+[data-theme="blueprint"] .hdr.is-over{ background:var(--bg); color:var(--fg); }
+[data-theme="blueprint"] .hdr.is-over .nav a[aria-current]{ color:var(--accent); }
+[data-theme="blueprint"] body{ padding-top:var(--header-h); }
+
+/* hero: full-bleed 16:9 plate, headline below it on paper */
+[data-theme="blueprint"] .hero{ display:block; min-height:0; overflow:visible; }
+[data-theme="blueprint"] .hero__media{ position:relative; inset:auto; aspect-ratio:16/9; overflow:hidden; }
+[data-theme="blueprint"] .hero__scrim{ display:none; }
+[data-theme="blueprint"] .hero__in{ color:var(--fg); padding-block:var(--space-8) var(--space-7); }
+[data-theme="blueprint"] .hero__in .meta{ color:var(--fg-muted) !important; }
+[data-theme="blueprint"] .hero__sub{ color:var(--fg-muted); }
+[data-theme="blueprint"] .hero__meta{ position:static; text-align:left; color:var(--fg-muted);
+  padding:0 var(--gutter) var(--space-7); }
+[data-theme="blueprint"] .hero .display{ max-width:15ch; }
+
+/* the gold rule — the only place gold appears outside the logo */
+[data-theme="blueprint"] .sec-head h2::before{
+  content:''; display:block; width:48px; height:3px; background:var(--gold);
+  margin-bottom:var(--space-4); transform:scaleX(0); transform-origin:left;
+}
+[data-theme="blueprint"] .sec-head.is-in h2::before{ transform:scaleX(1);
+  transition:transform 700ms var(--ease) 120ms; }
+
+/* rule above every card's text block */
+[data-theme="blueprint"] .card__body{ border-top:1px solid var(--rule); margin-top:var(--space-4); padding-top:var(--space-4); }
+[data-theme="blueprint"] .card__over{ display:none !important; }   /* no overlays on photography */
+
+/* no gradients or shadows anywhere in Workshop */
+[data-theme="blueprint"] .prefs__btn,
+[data-theme="blueprint"] .prefs__panel{ box-shadow:none; border:1px solid var(--fg); }
+
+[data-theme="blueprint"] .pull,
+[data-theme="blueprint"] .orn,
+[data-theme="blueprint"] .gridlines,
+[data-theme="blueprint"] .tick{ display:none !important; }
+
+[data-theme="blueprint"] .cur__ring{ border-color:rgba(255,255,255,.9); }
+
+
+/* =========================================================================
+   02 — MARQUE   (tokens: signal)
+   ========================================================================= */
+[data-theme="signal"]{ --card-ratio: 4/5; --hero-mode: over; }
+
+/* hero: 70vh, solid bottom-anchored scrim, headline inside it */
+[data-theme="signal"] .hero{ min-height:70vh; }
+[data-theme="signal"] .hero__scrim{
+  background:linear-gradient(to top, var(--bg) 0%, rgba(14,14,16,.86) 26%, rgba(14,14,16,0) 55%);
+}
+[data-theme="signal"] .hero__in{ padding-block:var(--space-8) var(--space-7); }
+
+/* cards sit on a raised surface and take a signal border on hover */
+[data-theme="signal"] .card__fig{ background:var(--surface); }
+[data-theme="signal"] .card{ background:var(--surface); padding:var(--space-3); }
+[data-theme="signal"] .card__body{ padding:var(--space-4) var(--space-2) var(--space-2); }
+[data-theme="signal"] .card{ outline:1px solid transparent; outline-offset:-1px;
+  transition:outline-color var(--duration) var(--ease); }
+[data-theme="signal"] .card:hover{ outline-color:var(--accent); }
+
+/* the column grid on section dividers — one per major section */
+[data-theme="signal"] .gridlines{ display:grid; }
+
+/* the isometric mark as a section ornament, bleeding off one edge */
+[data-theme="signal"] .orn{ opacity:.06; }
+
+/* mono everywhere data lives */
+[data-theme="signal"] .card__head .meta,
+[data-theme="signal"] .filters__count,
+[data-theme="signal"] .facts dd,
+[data-theme="signal"] .datarow__v{ font-family:var(--font-mono); }
+
+/* the project page swaps the sticky sidebar for a full-width data table */
+[data-theme="signal"] .pcols{ grid-template-columns:1fr; }
+[data-theme="signal"] .pcols aside{ display:none; }
+[data-theme="signal"] .datarow-sec{ display:block; }
+
+[data-theme="signal"] .pull{ display:none !important; }
+[data-theme="signal"] .btn--primary{ background:var(--accent); color:var(--on-accent); }
+
+/* Signal amplifies weak photography — a bright image is contained, not bled */
+[data-theme="signal"] .fig{ background:var(--ground-alt, #17171A); }
+
+
+/* =========================================================================
+   03 — MEASURE   (tokens: imprint)
+   ========================================================================= */
+[data-theme="imprint"]{ --card-ratio: 4/5; --hero-mode: below; }
+
+/* navigation is the most branded element on the site: it lives on maroon */
+[data-theme="imprint"] .hdr,
+[data-theme="imprint"] .hdr.is-over,
+[data-theme="imprint"] .hdr.is-stuck{
+  background:var(--field-bg); color:var(--field-fg); border-bottom-color:transparent;
+}
+[data-theme="imprint"] .hdr .nav a[aria-current]{ color:var(--field-accent); }
+[data-theme="imprint"] .hdr .units button[aria-pressed="true"] span{ color:var(--field-bg); }
+[data-theme="imprint"] body{ padding-top:var(--header-h); }
+
+/* hero: 16:9 plate, serif headline below it on bone. Maroon waits for section 2. */
+[data-theme="imprint"] .hero{ display:block; min-height:0; overflow:visible; }
+[data-theme="imprint"] .hero__media{ position:relative; inset:auto; aspect-ratio:16/9; overflow:hidden; }
+[data-theme="imprint"] .hero__scrim{ display:none; }
+[data-theme="imprint"] .hero__in{ color:var(--fg); padding-block:var(--space-9) var(--space-7); }
+[data-theme="imprint"] .hero__in .meta{ color:var(--fg-muted) !important; }
+[data-theme="imprint"] .hero__sub{ color:var(--fg-muted); }
+[data-theme="imprint"] .hero__meta{ position:static; text-align:left; color:var(--fg-muted);
+  padding:0 var(--gutter) var(--space-8); }
+[data-theme="imprint"] .hero .display{ max-width:14ch; }
+
+/* alternating chapters — bone, bone-alt, then a full maroon field */
+[data-theme="imprint"] .section:nth-of-type(even){ background:var(--bg-alt); }
+[data-theme="imprint"] .section.field,
+[data-theme="imprint"] .section.field:nth-of-type(even){ background:var(--field-bg); }
+
+/* the pull quote is what justifies the serif */
+[data-theme="imprint"] .pull{ display:block; }
+
+/* footer is a full maroon block with a gold hairline above it */
+[data-theme="imprint"] .ftr{
+  background:var(--field-bg); color:var(--field-fg);
+  border-top:3px solid var(--field-accent);
+}
+[data-theme="imprint"] .ftr a,
+[data-theme="imprint"] .ftr .muted{ color:var(--field-fg); }
+[data-theme="imprint"] .ftr h5,
+[data-theme="imprint"] .ftr__base{ color:var(--field-muted); border-top-color:rgba(255,255,255,.22); }
+[data-theme="imprint"] .ftr a:hover{ color:var(--field-accent); }
+
+/* card titles shift to maroon on hover */
+[data-theme="imprint"] .card__client{ transition:color var(--duration) var(--ease); }
+[data-theme="imprint"] .card:hover .card__client{ color:var(--accent); }
+[data-theme="imprint"] .card__over{ display:none !important; }
+
+/* a photograph never bleeds directly onto maroon — it gets a bone inset */
+[data-theme="imprint"] .field .fig,
+[data-theme="imprint"] .field .card__fig{ background:var(--bg); padding:12px; }
+
+[data-theme="imprint"] .orn,
+[data-theme="imprint"] .gridlines,
+[data-theme="imprint"] .tick{ display:none !important; }
+[data-theme="imprint"] .datarow-sec{ display:none; }
+
+
+/* =========================================================================
+   Presentation blocks that only one identity uses
+   ========================================================================= */
+.datarow-sec{ display:none; }
+.rail-sec{ display:none; }
+[data-theme="signal"] .rail-sec{ display:block; }
+[data-theme="signal"] #featured{ display:none; }
+
+/* Measure stacks the selected work as full-width plates instead of a grid */
+[data-theme="imprint"] #featured .grid--3{ grid-template-columns:1fr; gap:var(--space-10); }
+[data-theme="imprint"] #featured .feature,
+[data-theme="imprint"] #featured .feature--flip{
+  grid-template-columns:1fr; gap:var(--space-6); margin-bottom:var(--space-11) !important;
+}
+[data-theme="imprint"] #featured .feature__txt{ order:0 !important; max-width:52ch; }
+
+/* Workshop keeps the editorial two-column feature */
+[data-theme="blueprint"] #featured .feature{ align-items:end; }
+
+/* the project hero is shorter than the homepage hero, in the "over" mode only */
+[data-theme="signal"] .hero--project{ min-height:min(74vh,760px); }
+
+/* Both "headline below the image" identities push the proposition off a laptop
+   screen at a true 16:9. The plate keeps its ratio but is capped so the eyebrow
+   and the first line of the headline sit at the fold — the spec is honoured,
+   the sentence still gets read. */
+/* height, not max-height: with aspect-ratio set, a max-height shrinks the WIDTH
+   to match and the plate stops being full-bleed. */
+[data-theme="blueprint"] .hero__media,
+[data-theme="imprint"] .hero__media{ aspect-ratio:auto; width:100%; height:min(62vh, 640px); }
+[data-theme="blueprint"] .hero--project .hero__media,
+[data-theme="imprint"] .hero--project .hero__media{ height:min(56vh, 560px); }
+
+/* card aspect ratio is a per-identity token */
+.card__fig{ aspect-ratio:var(--card-ratio, 4/5); }
+.rail__card .card__fig{ aspect-ratio:4/5; }
+
+@media (max-width:860px){
+  [data-theme="signal"] .rail-sec{ display:none; }
+  [data-theme="signal"] #featured{ display:block; }
+  .rail__card{ width:78vw; }
+}
