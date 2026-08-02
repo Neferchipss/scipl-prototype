@@ -16,18 +16,31 @@
    =========================================================================== */
 
 /* ---------- shared, identity-independent ---------- */
+
+/* ⭐ GLOBAL UI SCALE
+   Every size in the system is expressed in rem, and the root font-size is
+   16px x --ui. So this one number rescales type, spacing, header height,
+   container and section rhythm together — exactly what browser zoom does,
+   but baked in so every visitor sees the intended density.
+
+   0.8 is the agreed default: the design reads better tighter. Set it to 1
+   to see the original scale. Viewport-relative values (vw/vh) are deliberately
+   left unscaled, which is also how real browser zoom behaves. */
+:root{ --ui: 0.8; }
+html{ font-size: calc(16px * var(--ui)); }
+
 :root{
   --radius: 0;                 /* all three identities: zero. Sector grammar. */
-  --container: 1440px;
+  --container: 90rem;          /* 1440px at --ui:1 */
   --measure: 68ch;
-  --gutter: clamp(20px, 4vw, 64px);
+  --gutter: clamp(1.25rem, 4vw, 4rem);
 
-  --space-1:4px;  --space-2:8px;  --space-3:12px; --space-4:16px;
-  --space-5:24px; --space-6:32px; --space-7:48px; --space-8:64px;
-  --space-9:96px; --space-10:128px; --space-11:160px; --space-12:192px;
+  --space-1:0.25rem;  --space-2:0.5rem;  --space-3:0.75rem; --space-4:1rem;
+  --space-5:1.5rem;   --space-6:2rem;    --space-7:3rem;    --space-8:4rem;
+  --space-9:6rem;     --space-10:8rem;   --space-11:10rem;  --space-12:12rem;
 
-  --header-h: 76px;
-  --header-h-min: 58px;
+  --header-h: 4.75rem;
+  --header-h-min: 3.625rem;
 
   /* motion, overridden per identity */
   --duration: 400ms;

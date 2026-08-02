@@ -15,13 +15,13 @@
 .cur{ position:fixed; top:0; left:0; z-index:250; pointer-events:none;
   mix-blend-mode:difference; opacity:0; transition:opacity .25s ease; }
 .cur.is-on{ opacity:1; }
-.cur__dot{ position:absolute; translate:-50% -50%; width:9px; height:9px; background:#fff; }
-.cur__ring{ position:absolute; translate:-50% -50%; width:40px; height:40px;
+.cur__dot{ position:absolute; translate:-50% -50%; width:0.5625rem; height:0.5625rem; background:#fff; }
+.cur__ring{ position:absolute; translate:-50% -50%; width:2.5rem; height:2.5rem;
   border:1px solid rgba(255,255,255,.85); transition:width .3s var(--ease), height .3s var(--ease); }
 .cur__lbl{ position:absolute; translate:-50% -50%; color:#fff; white-space:nowrap;
-  font-size:10px; letter-spacing:.14em; text-transform:uppercase; opacity:0;
+  font-size:0.625rem; letter-spacing:.14em; text-transform:uppercase; opacity:0;
   transition:opacity .25s ease; }
-.cur.is-media .cur__ring{ width:72px; height:72px; }
+.cur.is-media .cur__ring{ width:4.5rem; height:4.5rem; }
 .cur.is-media .cur__lbl{ opacity:1; }
 @media (hover:none),(max-width:900px){ .cur{ display:none; } }
 
@@ -41,7 +41,7 @@
 .tick__row span{ font-size:var(--fs-meta); letter-spacing:var(--track-meta);
   text-transform:uppercase; color:var(--fg-muted); white-space:nowrap;
   display:inline-flex; align-items:center; gap:var(--space-8); }
-.tick__row span::after{ content:''; width:5px; height:5px; background:var(--accent); flex:none; }
+.tick__row span::after{ content:''; width:0.3125rem; height:0.3125rem; background:var(--accent); flex:none; }
 
 /* ---------- magnetic button wrapper ---------- */
 .mag{ display:inline-block; will-change:transform; }
@@ -51,12 +51,12 @@
 .rail{ position:relative; }
 .rail__vp{ overflow:hidden; }
 .rail__track{ display:flex; gap:var(--space-6); width:max-content; padding-inline:var(--gutter); }
-.rail__card{ width:min(38vw, 460px); flex:none; }
+.rail__card{ width:min(38vw, 28.75rem); flex:none; }
 .rail__hint{ margin-top:var(--space-5); }
 
 /* ---------- mono data row (Marque's defining component) ---------- */
 .datarow{ border-top:1px solid var(--rule); }
-.datarow__r{ display:grid; grid-template-columns:200px 1fr; gap:var(--space-5);
+.datarow__r{ display:grid; grid-template-columns:12.5rem 1fr; gap:var(--space-5);
   padding-block:var(--space-4); border-bottom:1px solid var(--rule); align-items:baseline; }
 .datarow__k{ font-size:var(--fs-meta); letter-spacing:var(--track-meta);
   text-transform:uppercase; color:var(--fg-muted); }
@@ -67,11 +67,11 @@
 .pull{ display:none; }
 .pull__q{ font-family:var(--font-display); font-size:var(--fs-h1); line-height:1.14;
   max-width:24ch; font-style:italic; }
-.pull__bar{ width:48px; height:3px; background:var(--field-accent); margin-bottom:var(--space-6); }
+.pull__bar{ width:3rem; height:0.1875rem; background:var(--field-accent); margin-bottom:var(--space-6); }
 .pull__by{ margin-top:var(--space-6); }
 
 /* ---------- section ornament: the isometric mark (Marque) ---------- */
-.orn{ position:absolute; inset:auto -80px -60px auto; width:440px; height:440px;
+.orn{ position:absolute; inset:auto -5rem -3.75rem auto; width:27.5rem; height:27.5rem;
   opacity:0; pointer-events:none; color:var(--fg); }
 .orn svg{ width:100%; height:100%; }
 

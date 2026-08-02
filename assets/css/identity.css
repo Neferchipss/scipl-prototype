@@ -28,6 +28,10 @@
 [data-theme="blueprint"] .hdr{ background:var(--bg); color:var(--fg); border-bottom-color:var(--rule); }
 [data-theme="blueprint"] .hdr.is-over{ background:var(--bg); color:var(--fg); }
 [data-theme="blueprint"] .hdr.is-over .nav a[aria-current]{ color:var(--accent); }
+/* the header still carries .is-over (the hero is below it), so the over-photo
+   rule for the pressed unit chip has to be undone or its label goes dark-on-dark
+   and the chip reads as a solid black block */
+[data-theme="blueprint"] .hdr.is-over .units button[aria-pressed="true"] span{ color:var(--bg); }
 [data-theme="blueprint"] body{ padding-top:var(--header-h); }
 
 /* hero: full-bleed 16:9 plate, headline below it on paper */
@@ -43,7 +47,7 @@
 
 /* the gold rule — the only place gold appears outside the logo */
 [data-theme="blueprint"] .sec-head h2::before{
-  content:''; display:block; width:48px; height:3px; background:var(--gold);
+  content:''; display:block; width:3rem; height:0.1875rem; background:var(--gold);
   margin-bottom:var(--space-4); transform:scaleX(0); transform-origin:left;
 }
 [data-theme="blueprint"] .sec-head.is-in h2::before{ transform:scaleX(1);
@@ -161,7 +165,7 @@
 
 /* a photograph never bleeds directly onto maroon — it gets a bone inset */
 [data-theme="imprint"] .field .fig,
-[data-theme="imprint"] .field .card__fig{ background:var(--bg); padding:12px; }
+[data-theme="imprint"] .field .card__fig{ background:var(--bg); padding:0.75rem; }
 
 [data-theme="imprint"] .orn,
 [data-theme="imprint"] .gridlines,
@@ -189,7 +193,7 @@
 [data-theme="blueprint"] #featured .feature{ align-items:end; }
 
 /* the project hero is shorter than the homepage hero, in the "over" mode only */
-[data-theme="signal"] .hero--project{ min-height:min(74vh,760px); }
+[data-theme="signal"] .hero--project{ min-height:min(74vh,47.5rem); }
 
 /* Both "headline below the image" identities push the proposition off a laptop
    screen at a true 16:9. The plate keeps its ratio but is capped so the eyebrow
@@ -198,9 +202,9 @@
 /* height, not max-height: with aspect-ratio set, a max-height shrinks the WIDTH
    to match and the plate stops being full-bleed. */
 [data-theme="blueprint"] .hero__media,
-[data-theme="imprint"] .hero__media{ aspect-ratio:auto; width:100%; height:min(62vh, 640px); }
+[data-theme="imprint"] .hero__media{ aspect-ratio:auto; width:100%; height:min(52vh, 34rem); }
 [data-theme="blueprint"] .hero--project .hero__media,
-[data-theme="imprint"] .hero--project .hero__media{ height:min(56vh, 560px); }
+[data-theme="imprint"] .hero--project .hero__media{ height:min(48vh, 30rem); }
 
 /* card aspect ratio is a per-identity token */
 .card__fig{ aspect-ratio:var(--card-ratio, 4/5); }
